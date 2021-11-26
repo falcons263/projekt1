@@ -52,17 +52,20 @@ garpike and stingray are also present.'''
 print('Welcome to the app,', username,'.')
 print('We have 3 texts to be analysed.')
 print(sep)
-text = input(str('Enter number between 1 and 3 to select: '))
-# podminka pro overeni spravne zadane hodnoty
-if int(text) not in range(1,4):
-  print('Wrong value')
+while True:
+  text = input(str('Enter number between 1 and 3 to select: '))
+  # podminka pro overeni spravne zadane hodnoty
+  if text.isnumeric() == False or int(text) not in range(1,4):
+    print('Wrong value')
+  else:
+    break
 print(sep)
 
 # ověření vybraného textu
 #print(TEXTS[int(text) - 1])
 
 # odstranění nepotřebných znaků a oddělení slov
-clean_words = [word.strip("@{}&~ˇ^˘°˛`„´˝÷<>*,.()#đ“\n") for word in TEXTS[int(text)-1].split()]
+clean_words = [word.strip("@{}&~ˇ^˘°˛`„´˝÷<>*,.()#đ“\n") for word in TEXTS[int(text)-1].split() if word != word.isalpha()]
 #clean_words = [word.strip(",.()") for word in TEXTS[int(text)-1].split()]
 #print(clean_words)
 
