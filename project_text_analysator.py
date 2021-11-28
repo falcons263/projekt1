@@ -65,8 +65,8 @@ print(sep)
 #print(TEXTS[int(text) - 1])
 
 # odstranění nepotřebných znaků a oddělení slov
-clean_words = [word.strip("@{}&~ˇ^˘°˛`„´˝÷<>*,.()#đ“\n") for word in TEXTS[int(text)-1].split() if word != word.isalpha()]
-#clean_words = [word.strip(",.()") for word in TEXTS[int(text)-1].split()]
+clean_words = [word.strip("@{}&~ˇ^˘°˛`„´˝÷<>*,.()#đ“\n") for word in TEXTS[int(text)-1].split() if word.strip("@{}&~ˇ^˘°˛`„´˝÷<>*,.()#đ“\n")]
+
 #print(clean_words)
 
 # zjistíme celkový počet slov
