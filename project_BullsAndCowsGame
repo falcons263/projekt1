@@ -1,0 +1,84 @@
+# pozdravíme uživatele a vypíšeme úvodní text
+print("Hi there !")
+sep = "-" * 50
+print(sep)
+print("I've generated a random 4 digit number for you.")
+print("Let's play a bull and cows game.")
+print(sep)
+
+# program vytvoří tajné 4 místné číslo; číslice musí být unikátní a nesmí začínat nulou
+import random
+
+cislo = []
+pokusy = 0
+
+def cislo_gen():
+  for i in range(4):
+    c = random.randrange(0,9)
+    cislo.append(c)
+  # eliminujeme duplicity (množina ignoruje stejné číslo)
+  if len(cislo) > len(set(cislo)):
+    cislo.clear()
+    cislo_gen()
+  # pokud je první číslice nula, obsah proměnné cislo se vymaze a znovu se spustí smyčka
+  elif cislo[0] == 0:
+    cislo.clear()
+    cislo_gen()
+
+
+def Bulls_and_Cows_Game():
+    global pokusy
+    pokusy += 1
+    bulls = 0
+    cows = 0
+    while True:
+        tip = input(str("Enter a number: "))
+        # podmínky pro ověření správné hodnoty
+        if not tip.isnumeric() or tip.startswith(str(0)) or len(tip) != 4:
+            print("Wrong value")
+            print(sep)
+        # ověříme duplicity převodem na množinu
+        elif len(set(tip)) != 4:
+            print("duplicated values")
+            print(sep)
+        else:
+            break
+    # smyčky pro porovnání hodnot
+    volba = []
+    for v in range(4):
+        volba.append(int(tip[v]))
+    for v in range(4):
+        for p in range(4):
+            if (volba[v] == cislo[p]) and (volba[v] != cislo[v]):
+                cows += 1
+    for a in range(4):
+        if volba[a] == cislo[a]:
+            bulls += 1
+    # podmínky pro jednotné vs množné číslo
+    if (bulls != 1) and (cows != 1):
+        print(bulls, "Bulls", ",", cows, "Cows")
+        print(sep)
+    elif (bulls != 1) and (cows == 1):
+        print(bulls, "Bulls", ",", cows, "Cow")
+        print(sep)
+    elif (bulls == 1) and (cows != 1):
+        print(bulls, "Bull", ",", cows, "Cows")
+        print(sep)
+    else:
+        print(bulls, "Bull", ",", cows, "Cow")
+        print(sep)
+
+    if (bulls == 4) and (pokusy > 1):
+        print("Correct,you've guessed the right number in", pokusy, "guesses!")
+        print(sep)
+    if (bulls == 4) and (pokusy == 1):
+        print("Correct,you've guessed the right number in", pokusy, "guess!")
+        print(sep)
+    if (bulls != 4):
+        Bulls_and_Cows_Game()
+
+
+cislo_gen()
+#print(cislo)
+print(sep)
+Bulls_and_Cows_Game()
