@@ -1,3 +1,6 @@
+# import knihovny
+import random
+
 # pozdravíme uživatele a vypíšeme úvodní text
 print("Hi there !")
 sep = "-" * 50
@@ -7,23 +10,22 @@ print("Let's play a bull and cows game.")
 print(sep)
 
 # program vytvoří tajné 4 místné číslo; číslice musí být unikátní a nesmí začínat nulou
-import random
 
 cislo = []
 pokusy = 0
 
 def cislo_gen():
-  for i in range(4):
-    c = random.randrange(0,9)
-    cislo.append(c)
+    for i in range(4):
+        c = random.randrange(0,9)
+        cislo.append(c)
   # eliminujeme duplicity (množina ignoruje stejné číslo)
-  if len(cislo) > len(set(cislo)):
-    cislo.clear()
-    cislo_gen()
+    if len(cislo) > len(set(cislo)):
+        cislo.clear()
+        cislo_gen()
   # pokud je první číslice nula, obsah proměnné cislo se vymaze a znovu se spustí smyčka
-  elif cislo[0] == 0:
-    cislo.clear()
-    cislo_gen()
+    elif cislo[0] == 0:
+        cislo.clear()
+        cislo_gen()
 
 
 def Bulls_and_Cows_Game():
@@ -77,8 +79,10 @@ def Bulls_and_Cows_Game():
     if (bulls != 4):
         Bulls_and_Cows_Game()
 
+def main():
+    cislo_gen()
+    print(cislo)
+    Bulls_and_Cows_Game()
 
-cislo_gen()
-#print(cislo)
-print(sep)
-Bulls_and_Cows_Game()
+if __name__ == "__main__":
+    main()
